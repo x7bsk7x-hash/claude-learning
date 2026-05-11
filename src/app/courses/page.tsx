@@ -29,9 +29,8 @@ function CoursesContent() {
     <>
       <Navigation />
       <main style={{ maxWidth: 1100, margin: '0 auto', padding: '32px 16px 80px' }} className="dot-bg">
-        {/* Header */}
         <div style={{ marginBottom: 32 }}>
-          <div style={{ display: 'inline-block', background: 'rgba(88,166,255,0.08)', border: '1px solid rgba(88,166,255,0.2)', borderRadius: 20, padding: '4px 14px', fontSize: 11, color: 'var(--accent)', marginBottom: 12, letterSpacing: '0.06em' }}>
+          <div style={{ display: 'inline-block', background: 'rgba(157,140,255,0.08)', border: '1px solid rgba(157,140,255,0.2)', borderRadius: 20, padding: '4px 14px', fontSize: 11, color: 'var(--accent)', marginBottom: 12, letterSpacing: '0.06em' }}>
             ◈ コース一覧
           </div>
           <h1 style={{ fontSize: 'clamp(20px, 4vw, 28px)', fontWeight: 700, margin: '0 0 6px', letterSpacing: '-0.01em' }}>学習コース</h1>
@@ -43,14 +42,13 @@ function CoursesContent() {
           </p>
         </div>
 
-        {/* Part filter */}
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 28, overflowX: 'auto' }}>
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 28 }}>
           {parts.map(p => (
             <button key={p} onClick={() => setActivePart(p)} style={{
               padding: '7px 14px', borderRadius: 8, fontSize: 12, border: '1px solid', cursor: 'pointer', whiteSpace: 'nowrap',
               fontWeight: activePart === p ? 700 : 400,
               borderColor: activePart === p ? 'var(--accent)' : 'var(--border)',
-              background: activePart === p ? 'rgba(88,166,255,0.12)' : 'var(--bg-surface)',
+              background: activePart === p ? 'rgba(157,140,255,0.12)' : 'var(--bg-surface)',
               color: activePart === p ? 'var(--accent)' : 'var(--text-secondary)',
               transition: 'all 0.15s',
             }}>
@@ -64,7 +62,6 @@ function CoursesContent() {
           )}
         </div>
 
-        {/* Stats bar */}
         {activePart !== 0 && (
           <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 20 }}>
             {filtered.length}コース中 {completedInView}コース完了
@@ -78,14 +75,16 @@ function CoursesContent() {
               <Link key={course.id} href={`/courses/${course.id}`} style={{ textDecoration: 'none' }}>
                 <div className="card-hover" style={{
                   background: 'var(--bg-surface)',
-                  border: `1px solid ${done ? 'rgba(63,185,80,0.35)' : 'var(--border)'}`,
+                  border: `1px solid ${done ? 'rgba(45,206,137,0.35)' : 'var(--border)'}`,
                   borderRadius: 12, padding: '20px', height: '100%', display: 'flex', flexDirection: 'column', gap: 12,
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                    <span style={{ fontSize: 32 }}>{course.icon}</span>
+                    <div style={{ width: 40, height: 40, borderRadius: 8, background: 'rgba(157,140,255,0.08)', border: '1px solid rgba(157,140,255,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>
+                      P{course.part}
+                    </div>
                     {done
-                      ? <span style={{ fontSize: 11, color: 'var(--green)', background: 'rgba(63,185,80,0.1)', padding: '2px 8px', borderRadius: 4, fontWeight: 700 }}>✓ 完了</span>
-                      : <span style={{ fontSize: 11, color: 'var(--text-muted)', background: 'var(--bg-card)', padding: '2px 8px', borderRadius: 4, border: '1px solid var(--border)' }}>Part {course.part}</span>
+                      ? <span style={{ fontSize: 11, color: 'var(--green)', background: 'rgba(45,206,137,0.1)', padding: '2px 8px', borderRadius: 4, fontWeight: 700 }}>✓ 完了</span>
+                      : <span style={{ fontSize: 11, color: 'var(--text-muted)', background: 'var(--bg-card)', padding: '2px 8px', borderRadius: 4, border: '1px solid var(--border)' }}>{course.estimatedMinutes}分</span>
                     }
                   </div>
 
@@ -98,7 +97,7 @@ function CoursesContent() {
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 10, borderTop: '1px solid var(--border)' }}>
                     <LevelBadge level={course.difficulty} />
-                    <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>⏱ {course.estimatedMinutes}分</span>
+                    <span style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>⏱ {course.estimatedMinutes}分</span>
                   </div>
                 </div>
               </Link>

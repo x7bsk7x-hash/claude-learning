@@ -109,14 +109,15 @@ export default function PracticePage() {
     <>
       <Navigation />
       <main style={{ maxWidth: 640, margin: '0 auto', padding: '40px 16px 80px' }}>
-        {/* Back */}
         <Link href={`/courses/${courseId}`} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'var(--text-muted)', textDecoration: 'none', marginBottom: 36, padding: '6px 12px', border: '1px solid var(--border)', borderRadius: 7, background: 'var(--bg-surface)' }}>
           ← コースに戻る
         </Link>
 
         <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 14, padding: '36px 28px', textAlign: 'center' }}>
-          <div style={{ fontSize: 48, marginBottom: 16 }}>{course.icon}</div>
-          <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 8, letterSpacing: '0.05em' }}>Part {course.part} · {course.partLabel}</div>
+          <div style={{ width: 52, height: 52, borderRadius: 12, background: 'rgba(157,140,255,0.1)', border: '1px solid rgba(157,140,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: 'var(--accent)', fontFamily: 'var(--font-mono)', margin: '0 auto 20px' }}>
+            P{course.part}
+          </div>
+          <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 8, letterSpacing: '0.05em' }}>{course.partLabel}</div>
           <h1 style={{ fontSize: 'clamp(18px, 3vw, 22px)', fontWeight: 700, margin: '0 0 8px' }}>{course.title}</h1>
           <p style={{ color: 'var(--text-secondary)', marginBottom: 32, fontSize: 14 }}>演習問題: {questions.length}問</p>
 
@@ -148,10 +149,10 @@ export default function PracticePage() {
         <Navigation />
         <main style={{ maxWidth: 640, margin: '0 auto', padding: '48px 16px 80px', textAlign: 'center' }}>
           <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 14, padding: '36px 28px', marginBottom: 24 }}>
-            <div style={{ fontSize: 40, marginBottom: 16 }}>✅</div>
-            <h1 style={{ fontSize: 24, fontWeight: 700, margin: '0 0 8px' }}>演習完了！</h1>
-            <div style={{ fontSize: 48, fontWeight: 700, color: scoreColor, margin: '20px 0 6px', lineHeight: 1 }}>
-              {Math.round(avg * 100)}<span style={{ fontSize: 20 }}>点</span>
+            <div style={{ width: 52, height: 52, borderRadius: 12, background: avg >= 0.75 ? 'rgba(45,206,137,0.1)' : 'rgba(157,140,255,0.1)', border: `1px solid ${avg >= 0.75 ? 'rgba(45,206,137,0.3)' : 'rgba(157,140,255,0.3)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, color: avg >= 0.75 ? 'var(--green)' : 'var(--accent)', margin: '0 auto 16px' }}>✓</div>
+            <h1 style={{ fontSize: 22, fontWeight: 700, margin: '0 0 8px' }}>演習完了</h1>
+            <div style={{ fontSize: 48, fontWeight: 700, color: scoreColor, margin: '16px 0 4px', lineHeight: 1 }}>
+              {Math.round(avg * 100)}<span style={{ fontSize: 18, fontWeight: 400 }}>点</span>
             </div>
             <p style={{ color: 'var(--text-muted)', marginBottom: 0, fontSize: 14 }}>+{Math.round(avg * 30)}ポイント獲得</p>
           </div>
@@ -176,7 +177,6 @@ export default function PracticePage() {
     <>
       <Navigation />
       <main style={{ maxWidth: 720, margin: '0 auto', padding: '28px 16px 80px' }}>
-        {/* Progress header */}
         <div style={{ marginBottom: 24 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
             <Link href={`/courses/${courseId}`} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 12, color: 'var(--text-muted)', textDecoration: 'none', padding: '5px 10px', border: '1px solid var(--border)', borderRadius: 6, background: 'var(--bg-surface)' }}>
@@ -194,7 +194,6 @@ export default function PracticePage() {
           </div>
         </div>
 
-        {/* Question card */}
         <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 12, padding: 'clamp(18px, 4vw, 28px)', marginBottom: 16 }}>
           <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 10, letterSpacing: '0.05em' }}>{q.topic}</div>
           <h2 style={{ fontSize: 'clamp(15px, 2.5vw, 18px)', fontWeight: 600, lineHeight: 1.7, margin: '0 0 20px', color: 'var(--text-primary)' }}>{q.question}</h2>
@@ -204,8 +203,8 @@ export default function PracticePage() {
               {(q as MCQPracticeQuestion).options.map((opt, i) => {
                 let bg = 'var(--bg-card)', bc = 'var(--border)', color = 'var(--text-primary)';
                 if (selected !== null) {
-                  if (i === (q as MCQPracticeQuestion).correctIndex) { bg = 'rgba(63,185,80,0.1)'; bc = 'rgba(63,185,80,0.6)'; color = 'var(--green)'; }
-                  else if (i === selected) { bg = 'rgba(248,81,73,0.08)'; bc = 'rgba(248,81,73,0.5)'; color = 'var(--red)'; }
+                  if (i === (q as MCQPracticeQuestion).correctIndex) { bg = 'rgba(45,206,137,0.1)'; bc = 'rgba(45,206,137,0.5)'; color = 'var(--green)'; }
+                  else if (i === selected) { bg = 'rgba(247,95,106,0.08)'; bc = 'rgba(247,95,106,0.45)'; color = 'var(--red)'; }
                 }
                 return (
                   <button key={i} onClick={() => handleMCQ(i)} style={{ background: bg, border: `1px solid ${bc}`, borderRadius: 8, padding: '13px 16px', textAlign: 'left', cursor: selected !== null ? 'default' : 'pointer', color, fontSize: 14, lineHeight: 1.6, transition: 'all 0.15s', width: '100%' }}>
@@ -242,9 +241,8 @@ export default function PracticePage() {
           )}
         </div>
 
-        {/* Explanation */}
         {showExp && (
-          <div style={{ background: 'rgba(88,166,255,0.06)', border: '1px solid rgba(88,166,255,0.2)', borderRadius: 10, padding: '16px 18px', marginBottom: 16 }}>
+          <div style={{ background: 'rgba(157,140,255,0.05)', border: '1px solid rgba(157,140,255,0.18)', borderRadius: 10, padding: '16px 18px', marginBottom: 16 }}>
             <div style={{ fontWeight: 700, fontSize: 12, color: 'var(--accent)', marginBottom: 8, letterSpacing: '0.06em' }}>解説</div>
             <div style={{ fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.75, marginBottom: q.type === 'prompt-writing' ? 14 : 0 }}>
               {q.type === 'multiple-choice' ? (q as MCQPracticeQuestion).explanation : (q as PromptWritingQuestion).explanation}

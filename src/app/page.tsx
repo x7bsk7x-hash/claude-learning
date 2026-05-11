@@ -9,19 +9,19 @@ import { courses } from '@/data/courses';
 import type { UserProgress } from '@/lib/types';
 
 const features = [
-  { icon: '◎', title: '診断テスト', desc: '35問でレベルと弱点を特定', href: '/diagnostic', color: '#58a6ff' },
-  { icon: '◈', title: 'コース学習', desc: '6パート・19コースの体系的カリキュラム', href: '/courses', color: '#3fb950' },
-  { icon: '⊞', title: 'リファレンス', desc: 'コマンド・ショートカット早見表', href: '/reference', color: '#bc8cff' },
-  { icon: '✦', title: 'AIチューター', desc: 'Groq/Gemini/ClaudeとリアルタイムQ&A', href: '/ai-tutor', color: '#f55036' },
+  { icon: '◉', title: 'レベルテスト', desc: '35問でレベルと弱点を特定', href: '/diagnostic', color: 'var(--accent)' },
+  { icon: '◈', title: 'コース学習', desc: '6パート・19コースの体系的カリキュラム', href: '/courses', color: 'var(--green)' },
+  { icon: '⌨', title: 'コマンド早見表', desc: 'スラッシュコマンド・ショートカット一覧', href: '/reference', color: 'var(--purple)' },
+  { icon: '✦', title: 'AIチューター', desc: 'Groq/Gemini/ClaudeとリアルタイムQ&A', href: '/ai-tutor', color: 'var(--amber)' },
 ];
 
 const parts = [
-  { part: 1, label: 'AIとClaudeの基礎', desc: 'LLM・トークン・プロンプト設計', icon: '🧠' },
-  { part: 2, label: '開発環境の構築', desc: 'Node.js・Claude Code CLI・IDE連携', icon: '🛠️' },
-  { part: 3, label: 'Claude Code入門', desc: '基本操作・ファイル編集・スラッシュコマンド', icon: '🚀' },
-  { part: 4, label: 'Claude Code周辺機能', desc: 'Hooks・MCP・メモリ・パーミッション', icon: '⚙️' },
-  { part: 5, label: '実践的な開発', desc: 'バグ修正・TDD・コードレビュー', icon: '💻' },
-  { part: 6, label: 'チーム・組織での活用', desc: 'CLAUDE.md・CI/CD・コスト管理', icon: '👥' },
+  { part: 1, label: 'AIとClaudeの基礎', desc: 'LLM・トークン・プロンプト設計' },
+  { part: 2, label: '開発環境の構築', desc: 'Node.js・Claude Code CLI・IDE連携' },
+  { part: 3, label: 'Claude Code入門', desc: '基本操作・ファイル編集・スラッシュコマンド' },
+  { part: 4, label: 'Claude Code周辺機能', desc: 'Hooks・MCP・メモリ・パーミッション' },
+  { part: 5, label: '実践的な開発', desc: 'バグ修正・TDD・コードレビュー' },
+  { part: 6, label: 'チーム・組織での活用', desc: 'CLAUDE.md・CI/CD・コスト管理' },
 ];
 
 export default function Home() {
@@ -39,8 +39,8 @@ export default function Home() {
 
         {/* Hero */}
         <div style={{ textAlign: 'center', marginBottom: 64 }}>
-          <div style={{ display: 'inline-block', background: 'rgba(88,166,255,0.08)', border: '1px solid rgba(88,166,255,0.25)', borderRadius: 20, padding: '5px 16px', fontSize: 12, color: 'var(--accent)', marginBottom: 24, letterSpacing: '0.06em' }}>
-            ⚡ Claude Code / Anthropic API 学習プラットフォーム
+          <div style={{ display: 'inline-block', background: 'rgba(157,140,255,0.08)', border: '1px solid rgba(157,140,255,0.22)', borderRadius: 20, padding: '5px 16px', fontSize: 12, color: 'var(--accent)', marginBottom: 24, letterSpacing: '0.06em' }}>
+            ◆ Claude Code / Anthropic API 学習プラットフォーム
           </div>
           <h1 style={{ fontSize: 'clamp(26px, 5vw, 50px)', fontWeight: 700, margin: '0 0 20px', lineHeight: 1.2, letterSpacing: '-0.01em' }}>
             AIエンジニアリングを<br />
@@ -48,11 +48,11 @@ export default function Home() {
           </h1>
           <p style={{ fontSize: 'clamp(14px, 2.5vw, 17px)', color: 'var(--text-secondary)', maxWidth: 520, margin: '0 auto 36px', lineHeight: 1.8 }}>
             Claude Codeの基礎から実践・チーム活用まで。<br />
-            診断テストでレベルを把握し、最適な学習パスを進みましょう。
+            レベルテストでスキルを把握し、最適な学習パスを進みましょう。
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/diagnostic" className="btn-primary" style={{ padding: '12px 28px', fontSize: 15, display: 'inline-block', textDecoration: 'none' }}>
-              無料で診断を始める →
+              無料でテストを始める →
             </Link>
             <Link href="/courses" style={{ background: 'var(--bg-surface)', color: 'var(--text-secondary)', padding: '12px 28px', borderRadius: 10, fontWeight: 600, fontSize: 15, textDecoration: 'none', border: '1px solid var(--border)' }}>
               コース一覧を見る
@@ -63,7 +63,7 @@ export default function Home() {
         {/* Progress */}
         {progress && (completedCount > 0 || progress.diagnosticResult) && (
           <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 14, padding: '24px 28px', marginBottom: 48 }}>
-            <h2 style={{ margin: '0 0 20px', fontSize: 16, fontWeight: 700, color: 'var(--text-secondary)', letterSpacing: '0.06em' }}>📊 学習の進捗</h2>
+            <h2 style={{ margin: '0 0 20px', fontSize: 16, fontWeight: 700, color: 'var(--text-secondary)', letterSpacing: '0.06em' }}>学習の進捗</h2>
             <div style={{ display: 'flex', gap: 36, flexWrap: 'wrap', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
                 <ProgressRing value={progressPct} size={68} color="var(--accent)" />
@@ -92,7 +92,7 @@ export default function Home() {
                     if (!c) return null;
                     return (
                       <Link key={id} href={`/courses/${id}`} style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8, padding: '7px 12px', fontSize: 13, color: 'var(--text-primary)', textDecoration: 'none' }}>
-                        {c.icon} {c.title}
+                        {c.title}
                       </Link>
                     );
                   })}
@@ -107,7 +107,7 @@ export default function Home() {
           {features.map(f => (
             <Link key={f.href} href={f.href} style={{ textDecoration: 'none' }}>
               <div className="card-hover" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 12, padding: '22px 18px', height: '100%' }}>
-                <div style={{ fontSize: 28, marginBottom: 10, color: f.color }}>{f.icon}</div>
+                <div style={{ fontSize: 24, marginBottom: 10, color: f.color, fontFamily: 'var(--font-mono)' }}>{f.icon}</div>
                 <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 6 }}>{f.title}</div>
                 <div style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.6 }}>{f.desc}</div>
               </div>
@@ -122,7 +122,9 @@ export default function Home() {
             {parts.map(p => (
               <Link key={p.part} href={`/courses?part=${p.part}`} style={{ textDecoration: 'none' }}>
                 <div className="card-hover" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 10, padding: '13px 16px', display: 'flex', alignItems: 'center', gap: 14 }}>
-                  <span style={{ fontSize: 20 }}>{p.icon}</span>
+                  <div style={{ width: 30, height: 30, borderRadius: 6, background: 'rgba(157,140,255,0.1)', border: '1px solid rgba(157,140,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: 'var(--accent)', fontFamily: 'var(--font-mono)', flexShrink: 0 }}>
+                    {p.part}
+                  </div>
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                       <span style={{ fontSize: 11, color: 'var(--text-muted)', fontWeight: 700 }}>Part {p.part}</span>

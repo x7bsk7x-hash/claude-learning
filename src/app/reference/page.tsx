@@ -10,11 +10,11 @@ export default function ReferencePage() {
   const [search, setSearch] = useState('');
   const [catFilter, setCatFilter] = useState<string>('all');
 
-  const tabs: { id: Tab; label: string; icon: string }[] = [
-    { id: 'commands', label: 'スラッシュコマンド', icon: '/' },
-    { id: 'shortcuts', label: 'ショートカット', icon: '⌨' },
-    { id: 'permissions', label: 'ツール権限', icon: '🛡' },
-    { id: 'mcp', label: 'MCPサーバー', icon: '⚡' },
+  const tabs: { id: Tab; label: string; mono?: boolean }[] = [
+    { id: 'commands', label: '/コマンド', mono: true },
+    { id: 'shortcuts', label: 'キーボード', mono: false },
+    { id: 'permissions', label: '権限設定', mono: false },
+    { id: 'mcp', label: 'MCPサーバー', mono: false },
   ];
 
   const categories = ['all', ...Array.from(new Set(slashCommands.map(c => c.category)))];
@@ -32,13 +32,12 @@ export default function ReferencePage() {
     <>
       <Navigation />
       <main style={{ maxWidth: 1000, margin: '0 auto', padding: '32px 16px 80px' }} className="dot-bg">
-        {/* Header */}
         <div style={{ marginBottom: 28 }}>
-          <div style={{ display: 'inline-block', background: 'rgba(88,166,255,0.08)', border: '1px solid rgba(88,166,255,0.2)', borderRadius: 20, padding: '4px 14px', fontSize: 11, color: 'var(--accent)', marginBottom: 12, letterSpacing: '0.06em' }}>
-            ⊞ リファレンス
+          <div style={{ display: 'inline-block', background: 'rgba(157,140,255,0.08)', border: '1px solid rgba(157,140,255,0.2)', borderRadius: 20, padding: '4px 14px', fontSize: 11, color: 'var(--accent)', marginBottom: 12, letterSpacing: '0.06em', fontFamily: 'var(--font-mono)' }}>
+            ⌨ コマンド早見表
           </div>
-          <h1 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 700, margin: '0 0 6px', letterSpacing: '-0.01em' }}>コマンドリファレンス</h1>
-          <p style={{ color: 'var(--text-secondary)', margin: 0, fontSize: 14 }}>Claude Codeのコマンド・ショートカット・設定の一覧</p>
+          <h1 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 700, margin: '0 0 6px', letterSpacing: '-0.01em' }}>コマンド早見表</h1>
+          <p style={{ color: 'var(--text-secondary)', margin: 0, fontSize: 14 }}>Claude Codeのスラッシュコマンド・ショートカット・設定の一覧</p>
         </div>
 
         {/* Tabs */}
@@ -48,11 +47,10 @@ export default function ReferencePage() {
               padding: '8px 16px', borderRadius: 8, fontSize: 13, cursor: 'pointer', whiteSpace: 'nowrap',
               border: '1px solid', fontWeight: tab === t.id ? 700 : 400, transition: 'all 0.15s',
               borderColor: tab === t.id ? 'var(--accent)' : 'var(--border)',
-              background: tab === t.id ? 'rgba(88,166,255,0.12)' : 'var(--bg-surface)',
+              background: tab === t.id ? 'rgba(157,140,255,0.12)' : 'var(--bg-surface)',
               color: tab === t.id ? 'var(--accent)' : 'var(--text-secondary)',
-              display: 'flex', alignItems: 'center', gap: 6,
+              fontFamily: t.mono ? 'var(--font-mono)' : 'inherit',
             }}>
-              <span style={{ opacity: 0.7 }}>{t.icon}</span>
               {t.label}
             </button>
           ))}
@@ -72,7 +70,7 @@ export default function ReferencePage() {
                   <button key={c} onClick={() => setCatFilter(c)} style={{
                     padding: '6px 12px', borderRadius: 6, fontSize: 12, cursor: 'pointer', border: '1px solid', transition: 'all 0.15s',
                     borderColor: catFilter === c ? 'var(--accent)' : 'var(--border)',
-                    background: catFilter === c ? 'rgba(88,166,255,0.1)' : 'transparent',
+                    background: catFilter === c ? 'rgba(157,140,255,0.1)' : 'transparent',
                     color: catFilter === c ? 'var(--accent)' : 'var(--text-muted)',
                   }}>
                     {catLabel[c] ?? c}
@@ -86,8 +84,8 @@ export default function ReferencePage() {
                   「{search}」に一致するコマンドはありません
                 </div>
               ) : filteredCommands.map((cmd, i) => (
-                <div key={cmd.cmd} style={{ display: 'flex', gap: 14, padding: '14px 18px', borderBottom: i < filteredCommands.length - 1 ? '1px solid var(--border)' : 'none', alignItems: 'flex-start', transition: 'background 0.1s' }}>
-                  <code style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent)', fontSize: 13, background: 'rgba(88,166,255,0.08)', padding: '3px 10px', borderRadius: 5, whiteSpace: 'nowrap', flexShrink: 0, border: '1px solid rgba(88,166,255,0.15)' }}>{cmd.cmd}</code>
+                <div key={cmd.cmd} style={{ display: 'flex', gap: 14, padding: '14px 18px', borderBottom: i < filteredCommands.length - 1 ? '1px solid var(--border)' : 'none', alignItems: 'flex-start' }}>
+                  <code style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent)', fontSize: 13, background: 'rgba(157,140,255,0.08)', padding: '3px 10px', borderRadius: 5, whiteSpace: 'nowrap', flexShrink: 0, border: '1px solid rgba(157,140,255,0.15)' }}>{cmd.cmd}</code>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontSize: 14, color: 'var(--text-primary)', marginBottom: cmd.example ? 4 : 0 }}>{cmd.description}</div>
                     {cmd.example && <code style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>{cmd.example}</code>}
@@ -120,7 +118,7 @@ export default function ReferencePage() {
         {tab === 'permissions' && (
           <>
             <p style={{ color: 'var(--text-secondary)', fontSize: 14, marginBottom: 20, lineHeight: 1.7 }}>
-              Claude Codeが使用できるツールと各ツールのリスクレベルです。<code style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent)', background: 'rgba(88,166,255,0.08)', padding: '1px 6px', borderRadius: 4 }}>settings.json</code> のpermissionsで制御できます。
+              Claude Codeが使用できるツールと各ツールのリスクレベルです。<code style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent)', background: 'rgba(157,140,255,0.08)', padding: '1px 6px', borderRadius: 4 }}>settings.json</code> のpermissionsで制御できます。
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 10, marginBottom: 28 }}>
               {permissionTools.map(tool => (
@@ -159,7 +157,7 @@ export default function ReferencePage() {
           <>
             <p style={{ color: 'var(--text-secondary)', fontSize: 14, marginBottom: 20, lineHeight: 1.7 }}>
               MCPサーバーを追加することでClaude Codeの機能を拡張できます。
-              <code style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent)', background: 'rgba(88,166,255,0.08)', padding: '1px 6px', borderRadius: 4, marginLeft: 4 }}>claude mcp add</code> コマンドで追加します。
+              <code style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent)', background: 'rgba(157,140,255,0.08)', padding: '1px 6px', borderRadius: 4, marginLeft: 4 }}>claude mcp add</code> コマンドで追加します。
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {mcpServers.map(srv => (

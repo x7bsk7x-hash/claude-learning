@@ -84,8 +84,8 @@ export default function CoursePage() {
               return (
                 <button key={ch.id} onClick={() => handleChapterClick(i)} style={{
                   width: '100%', textAlign: 'left', padding: '8px 10px', borderRadius: 6, display: 'flex', gap: 8, alignItems: 'flex-start',
-                  background: i === currentIdx ? 'rgba(88,166,255,0.1)' : 'transparent',
-                  border: `1px solid ${i === currentIdx ? 'rgba(88,166,255,0.3)' : 'transparent'}`,
+                  background: i === currentIdx ? 'rgba(157,140,255,0.1)' : 'transparent',
+                  border: `1px solid ${i === currentIdx ? 'rgba(157,140,255,0.3)' : 'transparent'}`,
                   cursor: 'pointer', marginBottom: 3, transition: 'all 0.15s',
                 }}>
                   <span style={{ fontSize: 12, color: done ? 'var(--green)' : i === currentIdx ? 'var(--accent)' : 'var(--text-muted)', flexShrink: 0, marginTop: 1 }}>
@@ -97,8 +97,8 @@ export default function CoursePage() {
             })}
           </div>
           {allDone && (
-            <Link href={`/practice/${course.id}`} style={{ display: 'block', textAlign: 'center', background: 'rgba(63,185,80,0.1)', border: '1px solid rgba(63,185,80,0.35)', borderRadius: 8, padding: '10px 12px', fontSize: 12, color: 'var(--green)', fontWeight: 700, textDecoration: 'none' }}>
-              📝 演習問題に挑戦
+            <Link href={`/practice/${course.id}`} style={{ display: 'block', textAlign: 'center', background: 'rgba(45,206,137,0.08)', border: '1px solid rgba(45,206,137,0.3)', borderRadius: 8, padding: '10px 12px', fontSize: 12, color: 'var(--green)', fontWeight: 700, textDecoration: 'none' }}>
+              演習問題に挑戦 →
             </Link>
           )}
         </aside>
@@ -108,7 +108,7 @@ export default function CoursePage() {
           {/* Back + Breadcrumb */}
           <div style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 13, marginBottom: 20 }}>
             <Link href="/courses" style={{ display: 'flex', alignItems: 'center', gap: 4, color: 'var(--text-muted)', textDecoration: 'none', padding: '5px 10px', border: '1px solid var(--border)', borderRadius: 6, background: 'var(--bg-surface)', transition: 'all 0.15s', fontSize: 12 }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(88,166,255,0.4)'; e.currentTarget.style.color = 'var(--accent)'; }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(157,140,255,0.4)'; e.currentTarget.style.color = 'var(--accent)'; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-muted)'; }}>
               ← コース一覧
             </Link>
@@ -119,13 +119,14 @@ export default function CoursePage() {
           {/* Course header */}
           <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 12, padding: 'clamp(16px, 4vw, 24px)', marginBottom: 20 }}>
             <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 10, flexWrap: 'wrap' }}>
-              <span style={{ fontSize: 11, color: 'var(--text-muted)', background: 'var(--bg-card)', padding: '2px 8px', borderRadius: 4, border: '1px solid var(--border)' }}>Part {course.part} · {course.partLabel}</span>
+              <span style={{ fontSize: 11, color: 'var(--text-muted)', background: 'var(--bg-card)', padding: '2px 8px', borderRadius: 4, border: '1px solid var(--border)', fontFamily: 'var(--font-mono)' }}>Part {course.part}</span>
+              <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>{course.partLabel}</span>
               <LevelBadge level={course.difficulty} />
               <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>⏱ {course.estimatedMinutes}分</span>
-              {allDone && <span style={{ fontSize: 11, color: 'var(--green)', background: 'rgba(63,185,80,0.1)', padding: '2px 8px', borderRadius: 4 }}>✓ 完了済み</span>}
+              {allDone && <span style={{ fontSize: 11, color: 'var(--green)', background: 'rgba(45,206,137,0.1)', padding: '2px 8px', borderRadius: 4 }}>✓ 完了済み</span>}
             </div>
             <h1 style={{ fontSize: 'clamp(18px, 3.5vw, 24px)', fontWeight: 700, margin: '0 0 6px', lineHeight: 1.3 }}>
-              {course.icon} {course.title}
+              {course.title}
             </h1>
             <p style={{ color: 'var(--text-secondary)', margin: 0, fontSize: 14 }}>{course.description}</p>
           </div>
@@ -138,8 +139,8 @@ export default function CoursePage() {
                 <button key={ch.id} onClick={() => handleChapterClick(i)} style={{
                   padding: '6px 12px', borderRadius: 7, fontSize: 12, whiteSpace: 'nowrap', cursor: 'pointer',
                   border: '1px solid', flexShrink: 0, fontWeight: i === currentIdx ? 600 : 400, transition: 'all 0.15s',
-                  borderColor: i === currentIdx ? 'var(--accent)' : done ? 'rgba(63,185,80,0.35)' : 'var(--border)',
-                  background: i === currentIdx ? 'rgba(88,166,255,0.1)' : 'transparent',
+                  borderColor: i === currentIdx ? 'var(--accent)' : done ? 'rgba(45,206,137,0.35)' : 'var(--border)',
+                  background: i === currentIdx ? 'rgba(157,140,255,0.1)' : 'transparent',
                   color: i === currentIdx ? 'var(--accent)' : done ? 'var(--green)' : 'var(--text-muted)',
                 }}>
                   {done ? '✓' : `${i + 1}`}. {ch.title}
@@ -158,13 +159,13 @@ export default function CoursePage() {
 
           {/* Course complete banner */}
           {courseComplete && (
-            <div style={{ background: 'rgba(63,185,80,0.08)', border: '1px solid rgba(63,185,80,0.35)', borderRadius: 12, padding: '28px 24px', marginBottom: 20, textAlign: 'center' }}>
-              <div style={{ fontSize: 40, marginBottom: 10 }}>🎉</div>
-              <div style={{ fontSize: 20, fontWeight: 700, color: 'var(--green)', marginBottom: 6 }}>コース完了！</div>
+            <div style={{ background: 'rgba(45,206,137,0.07)', border: '1px solid rgba(45,206,137,0.3)', borderRadius: 12, padding: '28px 24px', marginBottom: 20, textAlign: 'center' }}>
+              <div style={{ width: 52, height: 52, borderRadius: 12, background: 'rgba(45,206,137,0.12)', border: '1px solid rgba(45,206,137,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, color: 'var(--green)', margin: '0 auto 14px' }}>✓</div>
+              <div style={{ fontSize: 20, fontWeight: 700, color: 'var(--green)', marginBottom: 6 }}>コース完了</div>
               <div style={{ color: 'var(--text-muted)', marginBottom: 24, fontSize: 14 }}>+100ポイント獲得</div>
               <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-                <Link href={`/practice/${course.id}`} style={{ background: 'var(--green)', color: '#070d14', padding: '11px 24px', borderRadius: 8, fontWeight: 700, textDecoration: 'none', fontSize: 14 }}>
-                  📝 演習に挑戦する
+                <Link href={`/practice/${course.id}`} style={{ background: 'var(--green)', color: '#07090e', padding: '11px 24px', borderRadius: 8, fontWeight: 700, textDecoration: 'none', fontSize: 14 }}>
+                  演習に挑戦する →
                 </Link>
                 {nextCourse && (
                   <Link href={`/courses/${nextCourse.id}`} style={{ background: 'var(--bg-card)', color: 'var(--text-primary)', padding: '11px 22px', borderRadius: 8, fontWeight: 600, textDecoration: 'none', border: '1px solid var(--border)', fontSize: 14 }}>
