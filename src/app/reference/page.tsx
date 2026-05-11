@@ -10,11 +10,11 @@ export default function ReferencePage() {
   const [search, setSearch] = useState('');
   const [catFilter, setCatFilter] = useState<string>('all');
 
-  const tabs: { id: Tab; label: string }[] = [
-    { id: 'commands', label: 'スラッシュコマンド' },
-    { id: 'shortcuts', label: 'キーボードショートカット' },
-    { id: 'permissions', label: 'ツール権限' },
-    { id: 'mcp', label: 'MCPサーバー' },
+  const tabs: { id: Tab; label: string; icon: string }[] = [
+    { id: 'commands', label: 'スラッシュコマンド', icon: '/' },
+    { id: 'shortcuts', label: 'ショートカット', icon: '⌨' },
+    { id: 'permissions', label: 'ツール権限', icon: '🛡' },
+    { id: 'mcp', label: 'MCPサーバー', icon: '⚡' },
   ];
 
   const categories = ['all', ...Array.from(new Set(slashCommands.map(c => c.category)))];
@@ -31,20 +31,28 @@ export default function ReferencePage() {
   return (
     <>
       <Navigation />
-      <main style={{ maxWidth: 1000, margin: '0 auto', padding: '32px 16px 80px' }}>
-        <h1 style={{ fontSize: 26, fontWeight: 700, marginBottom: 6 }}>リファレンス</h1>
-        <p style={{ color: 'var(--text-secondary)', marginBottom: 28 }}>Claude Codeのコマンド・ショートカット・設定の一覧</p>
+      <main style={{ maxWidth: 1000, margin: '0 auto', padding: '32px 16px 80px' }} className="dot-bg">
+        {/* Header */}
+        <div style={{ marginBottom: 28 }}>
+          <div style={{ display: 'inline-block', background: 'rgba(88,166,255,0.08)', border: '1px solid rgba(88,166,255,0.2)', borderRadius: 20, padding: '4px 14px', fontSize: 11, color: 'var(--accent)', marginBottom: 12, letterSpacing: '0.06em' }}>
+            ⊞ リファレンス
+          </div>
+          <h1 style={{ fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 700, margin: '0 0 6px', letterSpacing: '-0.01em' }}>コマンドリファレンス</h1>
+          <p style={{ color: 'var(--text-secondary)', margin: 0, fontSize: 14 }}>Claude Codeのコマンド・ショートカット・設定の一覧</p>
+        </div>
 
         {/* Tabs */}
-        <div style={{ display: 'flex', gap: 6, marginBottom: 28, overflowX: 'auto' }}>
+        <div style={{ display: 'flex', gap: 6, marginBottom: 24, overflowX: 'auto', paddingBottom: 2 }}>
           {tabs.map(t => (
             <button key={t.id} onClick={() => { setTab(t.id); setSearch(''); setCatFilter('all'); }} style={{
-              padding: '8px 16px', borderRadius: 8, fontSize: 14, cursor: 'pointer', whiteSpace: 'nowrap',
-              border: '1px solid', fontWeight: tab === t.id ? 600 : 400,
+              padding: '8px 16px', borderRadius: 8, fontSize: 13, cursor: 'pointer', whiteSpace: 'nowrap',
+              border: '1px solid', fontWeight: tab === t.id ? 700 : 400, transition: 'all 0.15s',
               borderColor: tab === t.id ? 'var(--accent)' : 'var(--border)',
-              background: tab === t.id ? 'rgba(88,166,255,0.12)' : 'var(--bg-card)',
+              background: tab === t.id ? 'rgba(88,166,255,0.12)' : 'var(--bg-surface)',
               color: tab === t.id ? 'var(--accent)' : 'var(--text-secondary)',
+              display: 'flex', alignItems: 'center', gap: 6,
             }}>
+              <span style={{ opacity: 0.7 }}>{t.icon}</span>
               {t.label}
             </button>
           ))}
@@ -52,25 +60,39 @@ export default function ReferencePage() {
 
         {tab === 'commands' && (
           <>
-            <div style={{ display: 'flex', gap: 10, marginBottom: 20, flexWrap: 'wrap' }}>
-              <input value={search} onChange={e => setSearch(e.target.value)} placeholder="コマンドを検索..." style={{ flex: 1, minWidth: 200, padding: '8px 12px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8, color: 'var(--text-primary)', fontSize: 14, outline: 'none' }} />
-              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: 8, marginBottom: 18, flexWrap: 'wrap' }}>
+              <input
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                placeholder="コマンドを検索..."
+                style={{ flex: 1, minWidth: 180, padding: '8px 12px', background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 8, color: 'var(--text-primary)', fontSize: 14, outline: 'none', fontFamily: 'inherit' }}
+              />
+              <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
                 {categories.map(c => (
-                  <button key={c} onClick={() => setCatFilter(c)} style={{ padding: '6px 12px', borderRadius: 6, fontSize: 12, cursor: 'pointer', border: '1px solid', borderColor: catFilter === c ? 'var(--accent)' : 'var(--border)', background: catFilter === c ? 'rgba(88,166,255,0.1)' : 'transparent', color: catFilter === c ? 'var(--accent)' : 'var(--text-muted)' }}>
+                  <button key={c} onClick={() => setCatFilter(c)} style={{
+                    padding: '6px 12px', borderRadius: 6, fontSize: 12, cursor: 'pointer', border: '1px solid', transition: 'all 0.15s',
+                    borderColor: catFilter === c ? 'var(--accent)' : 'var(--border)',
+                    background: catFilter === c ? 'rgba(88,166,255,0.1)' : 'transparent',
+                    color: catFilter === c ? 'var(--accent)' : 'var(--text-muted)',
+                  }}>
                     {catLabel[c] ?? c}
                   </button>
                 ))}
               </div>
             </div>
-            <div style={{ border: '1px solid var(--border)', borderRadius: 10, overflow: 'hidden' }}>
-              {filteredCommands.map((cmd, i) => (
-                <div key={cmd.cmd} style={{ display: 'flex', gap: 16, padding: '14px 18px', borderBottom: i < filteredCommands.length - 1 ? '1px solid var(--border)' : 'none', alignItems: 'flex-start' }}>
-                  <code style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent)', fontSize: 14, background: 'rgba(88,166,255,0.1)', padding: '3px 10px', borderRadius: 5, whiteSpace: 'nowrap', flexShrink: 0 }}>{cmd.cmd}</code>
+            <div style={{ border: '1px solid var(--border)', borderRadius: 10, overflow: 'hidden', background: 'var(--bg-surface)' }}>
+              {filteredCommands.length === 0 ? (
+                <div style={{ padding: '32px 20px', textAlign: 'center', color: 'var(--text-muted)', fontSize: 14 }}>
+                  「{search}」に一致するコマンドはありません
+                </div>
+              ) : filteredCommands.map((cmd, i) => (
+                <div key={cmd.cmd} style={{ display: 'flex', gap: 14, padding: '14px 18px', borderBottom: i < filteredCommands.length - 1 ? '1px solid var(--border)' : 'none', alignItems: 'flex-start', transition: 'background 0.1s' }}>
+                  <code style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent)', fontSize: 13, background: 'rgba(88,166,255,0.08)', padding: '3px 10px', borderRadius: 5, whiteSpace: 'nowrap', flexShrink: 0, border: '1px solid rgba(88,166,255,0.15)' }}>{cmd.cmd}</code>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontSize: 14, color: 'var(--text-primary)', marginBottom: cmd.example ? 4 : 0 }}>{cmd.description}</div>
                     {cmd.example && <code style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>{cmd.example}</code>}
                   </div>
-                  <span style={{ fontSize: 11, color: 'var(--text-muted)', background: 'var(--bg-card)', padding: '2px 8px', borderRadius: 4, flexShrink: 0 }}>{catLabel[cmd.category]}</span>
+                  <span style={{ fontSize: 11, color: 'var(--text-muted)', background: 'var(--bg-card)', padding: '2px 8px', borderRadius: 4, flexShrink: 0, border: '1px solid var(--border)' }}>{catLabel[cmd.category]}</span>
                 </div>
               ))}
             </div>
@@ -78,12 +100,12 @@ export default function ReferencePage() {
         )}
 
         {tab === 'shortcuts' && (
-          <div style={{ border: '1px solid var(--border)', borderRadius: 10, overflow: 'hidden' }}>
+          <div style={{ border: '1px solid var(--border)', borderRadius: 10, overflow: 'hidden', background: 'var(--bg-surface)' }}>
             {keyboardShortcuts.map((sc, i) => (
               <div key={i} style={{ display: 'flex', gap: 20, padding: '14px 18px', borderBottom: i < keyboardShortcuts.length - 1 ? '1px solid var(--border)' : 'none', alignItems: 'center' }}>
                 <div style={{ display: 'flex', gap: 4, flexShrink: 0 }}>
                   {sc.keys.map((k, ki) => (
-                    <kbd key={ki} style={{ fontFamily: 'var(--font-mono)', fontSize: 13, background: 'var(--bg-card)', border: '1px solid var(--border-strong)', borderRadius: 5, padding: '3px 8px', color: 'var(--text-primary)' }}>{k}</kbd>
+                    <kbd key={ki} style={{ fontFamily: 'var(--font-mono)', fontSize: 12, background: 'var(--bg-card)', border: '1px solid var(--border-strong)', borderRadius: 5, padding: '3px 8px', color: 'var(--text-primary)', boxShadow: '0 1px 0 var(--border-strong)' }}>{k}</kbd>
                   ))}
                 </div>
                 <div style={{ flex: 1 }}>
@@ -97,22 +119,24 @@ export default function ReferencePage() {
 
         {tab === 'permissions' && (
           <>
-            <p style={{ color: 'var(--text-secondary)', fontSize: 14, marginBottom: 20 }}>Claude Codeが使用できるツールと、各ツールのリスクレベルです。settings.jsonのpermissionsで制御できます。</p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: 14, marginBottom: 20, lineHeight: 1.7 }}>
+              Claude Codeが使用できるツールと各ツールのリスクレベルです。<code style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent)', background: 'rgba(88,166,255,0.08)', padding: '1px 6px', borderRadius: 4 }}>settings.json</code> のpermissionsで制御できます。
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 10, marginBottom: 28 }}>
               {permissionTools.map(tool => (
-                <div key={tool.name} style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 10, padding: '16px 18px' }}>
+                <div key={tool.name} className="card-hover" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 10, padding: '16px 18px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                    <code style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent)', fontWeight: 700 }}>{tool.name}</code>
-                    <span style={{ fontSize: 11, color: riskColor[tool.risk], background: `${riskColor[tool.risk]}20`, padding: '2px 8px', borderRadius: 4 }}>{riskLabel[tool.risk]}</span>
+                    <code style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent)', fontWeight: 700, fontSize: 13 }}>{tool.name}</code>
+                    <span style={{ fontSize: 11, color: riskColor[tool.risk], background: `${riskColor[tool.risk]}18`, padding: '2px 8px', borderRadius: 4, border: `1px solid ${riskColor[tool.risk]}40`, fontWeight: 600 }}>{riskLabel[tool.risk]}</span>
                   </div>
-                  <p style={{ margin: 0, fontSize: 13, color: 'var(--text-secondary)' }}>{tool.description}</p>
+                  <p style={{ margin: 0, fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.6 }}>{tool.description}</p>
                 </div>
               ))}
             </div>
-            <div style={{ marginTop: 28 }}>
-              <h2 style={{ fontSize: 16, marginBottom: 14 }}>設定例</h2>
-              <div style={{ background: '#0d1117', border: '1px solid var(--border)', borderRadius: 8, padding: 20, overflowX: 'auto' }}>
-                <pre style={{ margin: 0, fontSize: 13, fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{`{
+            <div>
+              <h2 style={{ fontSize: 15, fontWeight: 700, marginBottom: 12, color: 'var(--text-secondary)', letterSpacing: '0.04em' }}>設定例</h2>
+              <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8, padding: 20, overflowX: 'auto' }}>
+                <pre style={{ margin: 0, fontSize: 13, fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)', lineHeight: 1.8 }}>{`{
   "permissions": {
     "allow": [
       "Read", "Write", "Edit",
@@ -133,15 +157,18 @@ export default function ReferencePage() {
 
         {tab === 'mcp' && (
           <>
-            <p style={{ color: 'var(--text-secondary)', fontSize: 14, marginBottom: 20 }}>MCPサーバーを追加することでClaude Codeの機能を拡張できます。<code style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent)' }}>claude mcp add</code> コマンドで追加します。</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: 14, marginBottom: 20, lineHeight: 1.7 }}>
+              MCPサーバーを追加することでClaude Codeの機能を拡張できます。
+              <code style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent)', background: 'rgba(88,166,255,0.08)', padding: '1px 6px', borderRadius: 4, marginLeft: 4 }}>claude mcp add</code> コマンドで追加します。
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {mcpServers.map(srv => (
-                <div key={srv.name} style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 10, padding: '16px 18px', display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
+                <div key={srv.name} className="card-hover" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 10, padding: '16px 18px', display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
                   <div style={{ flex: 1, minWidth: 120 }}>
-                    <div style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: 4 }}>{srv.name}</div>
-                    <div style={{ fontSize: 13, color: 'var(--text-secondary)' }}>{srv.description}</div>
+                    <div style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: 4, fontSize: 14 }}>{srv.name}</div>
+                    <div style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.5 }}>{srv.description}</div>
                   </div>
-                  <code style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-muted)', background: 'var(--bg-card)', padding: '4px 10px', borderRadius: 5, whiteSpace: 'nowrap' }}>{srv.package}</code>
+                  <code style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-muted)', background: 'var(--bg-card)', padding: '4px 10px', borderRadius: 5, whiteSpace: 'nowrap', border: '1px solid var(--border)' }}>{srv.package}</code>
                 </div>
               ))}
             </div>

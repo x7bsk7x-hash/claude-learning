@@ -23,50 +23,75 @@ function CoursesContent() {
   }, []);
 
   const filtered = activePart === 0 ? courses : courses.filter(c => c.part === activePart);
+  const completedInView = filtered.filter(c => completedCourses.includes(c.id)).length;
 
   return (
     <>
       <Navigation />
-      <main style={{ maxWidth: 1100, margin: '0 auto', padding: '32px 16px 80px' }}>
-        <h1 style={{ fontSize: 26, fontWeight: 700, marginBottom: 8 }}>コース一覧</h1>
-        <p style={{ color: 'var(--text-secondary)', marginBottom: 24 }}>{courses.length}コース・6パートの体系的カリキュラム</p>
-
-        {/* Part filter */}
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 32, overflowX: 'auto' }}>
-          {parts.map(p => (
-            <button key={p} onClick={() => setActivePart(p)} style={{
-              padding: '6px 14px', borderRadius: 6, fontSize: 13, border: '1px solid',
-              borderColor: activePart === p ? 'var(--accent)' : 'var(--border)',
-              background: activePart === p ? 'rgba(88,166,255,0.12)' : 'var(--bg-card)',
-              color: activePart === p ? 'var(--accent)' : 'var(--text-secondary)',
-              cursor: 'pointer', whiteSpace: 'nowrap', fontWeight: activePart === p ? 600 : 400,
-            }}>
-              {p === 0 ? 'すべて' : `Part ${p}: ${getPartLabel(p)}`}
-            </button>
-          ))}
+      <main style={{ maxWidth: 1100, margin: '0 auto', padding: '32px 16px 80px' }} className="dot-bg">
+        {/* Header */}
+        <div style={{ marginBottom: 32 }}>
+          <div style={{ display: 'inline-block', background: 'rgba(88,166,255,0.08)', border: '1px solid rgba(88,166,255,0.2)', borderRadius: 20, padding: '4px 14px', fontSize: 11, color: 'var(--accent)', marginBottom: 12, letterSpacing: '0.06em' }}>
+            ◈ コース一覧
+          </div>
+          <h1 style={{ fontSize: 'clamp(20px, 4vw, 28px)', fontWeight: 700, margin: '0 0 6px', letterSpacing: '-0.01em' }}>学習コース</h1>
+          <p style={{ color: 'var(--text-secondary)', margin: 0, fontSize: 14 }}>
+            {courses.length}コース・6パートの体系的カリキュラム
+            {completedCourses.length > 0 && (
+              <span style={{ marginLeft: 12, color: 'var(--green)' }}>✓ {completedCourses.length}/{courses.length} 完了</span>
+            )}
+          </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
+        {/* Part filter */}
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 28, overflowX: 'auto' }}>
+          {parts.map(p => (
+            <button key={p} onClick={() => setActivePart(p)} style={{
+              padding: '7px 14px', borderRadius: 8, fontSize: 12, border: '1px solid', cursor: 'pointer', whiteSpace: 'nowrap',
+              fontWeight: activePart === p ? 700 : 400,
+              borderColor: activePart === p ? 'var(--accent)' : 'var(--border)',
+              background: activePart === p ? 'rgba(88,166,255,0.12)' : 'var(--bg-surface)',
+              color: activePart === p ? 'var(--accent)' : 'var(--text-secondary)',
+              transition: 'all 0.15s',
+            }}>
+              {p === 0 ? 'すべて' : `Part ${p}`}
+            </button>
+          ))}
+          {activePart !== 0 && (
+            <div style={{ display: 'flex', alignItems: 'center', fontSize: 13, color: 'var(--text-muted)', padding: '7px 4px' }}>
+              — {getPartLabel(activePart)}
+            </div>
+          )}
+        </div>
+
+        {/* Stats bar */}
+        {activePart !== 0 && (
+          <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 20 }}>
+            {filtered.length}コース中 {completedInView}コース完了
+          </div>
+        )}
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 14 }}>
           {filtered.map(course => {
             const done = completedCourses.includes(course.id);
             return (
               <Link key={course.id} href={`/courses/${course.id}`} style={{ textDecoration: 'none' }}>
-                <div style={{
-                  background: 'var(--bg-surface)', border: `1px solid ${done ? 'rgba(63,185,80,0.4)' : 'var(--border)'}`,
+                <div className="card-hover" style={{
+                  background: 'var(--bg-surface)',
+                  border: `1px solid ${done ? 'rgba(63,185,80,0.35)' : 'var(--border)'}`,
                   borderRadius: 12, padding: '20px', height: '100%', display: 'flex', flexDirection: 'column', gap: 12,
-                  transition: 'border-color 0.15s',
-                }}
-                  onMouseEnter={e => { if (!done) e.currentTarget.style.borderColor = 'rgba(88,166,255,0.4)'; }}
-                  onMouseLeave={e => { if (!done) e.currentTarget.style.borderColor = 'var(--border)'; }}>
-
+                }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                     <span style={{ fontSize: 32 }}>{course.icon}</span>
-                    {done && <span style={{ fontSize: 11, color: 'var(--green)', background: 'rgba(63,185,80,0.1)', padding: '2px 8px', borderRadius: 4, fontWeight: 600 }}>✓ 完了</span>}
+                    {done
+                      ? <span style={{ fontSize: 11, color: 'var(--green)', background: 'rgba(63,185,80,0.1)', padding: '2px 8px', borderRadius: 4, fontWeight: 700 }}>✓ 完了</span>
+                      : <span style={{ fontSize: 11, color: 'var(--text-muted)', background: 'var(--bg-card)', padding: '2px 8px', borderRadius: 4, border: '1px solid var(--border)' }}>Part {course.part}</span>
+                    }
                   </div>
 
                   <div>
-                    <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Part {course.part} · {course.partLabel}</div>
-                    <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--text-primary)', lineHeight: 1.4 }}>{course.title}</div>
+                    <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>{course.partLabel}</div>
+                    <div style={{ fontWeight: 700, fontSize: 15, color: 'var(--text-primary)', lineHeight: 1.4 }}>{course.title}</div>
                   </div>
 
                   <div style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.6, flex: 1 }}>{course.description}</div>
@@ -87,7 +112,7 @@ function CoursesContent() {
 
 export default function CoursesPage() {
   return (
-    <Suspense fallback={<div style={{ padding: 40, color: 'var(--text-muted)' }}>読み込み中...</div>}>
+    <Suspense fallback={<div style={{ padding: 40, textAlign: 'center', color: 'var(--text-muted)' }}>読み込み中...</div>}>
       <CoursesContent />
     </Suspense>
   );
