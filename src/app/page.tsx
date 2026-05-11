@@ -52,7 +52,7 @@ export default function Home() {
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/diagnostic" className="btn-primary" style={{ padding: '12px 28px', fontSize: 15, display: 'inline-block', textDecoration: 'none' }}>
-              無料でテストを始める →
+              テストを始める →
             </Link>
             <Link href="/courses" style={{ background: 'var(--bg-surface)', color: 'var(--text-secondary)', padding: '12px 28px', borderRadius: 10, fontWeight: 600, fontSize: 15, textDecoration: 'none', border: '1px solid var(--border)' }}>
               コース一覧を見る

@@ -15,6 +15,10 @@ export type ChapterContent =
   | { type: 'shortcut-list'; shortcuts: { keys: string[]; description: string }[] }
   | { type: 'table'; headers: string[]; rows: string[][] }
   | { type: 'flow'; title?: string; nodes: { label: string; desc?: string; color?: 'accent' | 'green' | 'amber' | 'red' | 'muted' }[] }
+  | { type: 'stat-grid'; stats: { value: string; label: string; sub?: string; color?: 'accent' | 'green' | 'amber' | 'red' | 'muted' }[] }
+  | { type: 'terminal'; title?: string; lines: { type: 'input' | 'output' | 'comment'; content: string }[] }
+  | { type: 'architecture'; title?: string; layers: { label: string; items: string[]; color?: 'accent' | 'green' | 'amber' | 'muted' }[] }
+  | { type: 'key-points'; title?: string; points: { mark: string; title: string; desc?: string; color?: 'accent' | 'green' | 'amber' | 'red' | 'muted' }[] }
 
 export interface Chapter {
   id: string;
