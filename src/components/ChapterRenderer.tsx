@@ -27,22 +27,22 @@ export default function ChapterRenderer({ contents }: { contents: ChapterContent
         );
 
         if (item.type === 'highlight') return (
-          <div key={i} style={{ background: 'rgba(88,166,255,0.08)', border: '1px solid rgba(88,166,255,0.3)', borderRadius: 8, padding: '12px 16px', margin: '16px 0' }}>
+          <div key={i} style={{ background: 'rgba(157,140,255,0.07)', border: '1px solid rgba(157,140,255,0.3)', borderRadius: 8, padding: '12px 16px', margin: '16px 0' }}>
             {item.label && <div style={{ fontSize: 11, color: 'var(--accent)', fontWeight: 700, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{item.label}</div>}
             <div style={{ color: 'var(--text-primary)', lineHeight: 1.7 }}>{item.content}</div>
           </div>
         );
 
         if (item.type === 'tip') return (
-          <div key={i} style={{ background: 'rgba(63,185,80,0.08)', border: '1px solid rgba(63,185,80,0.3)', borderRadius: 8, padding: '12px 16px', margin: '16px 0', display: 'flex', gap: 10 }}>
-            <span style={{ fontSize: 16 }}>💡</span>
+          <div key={i} style={{ background: 'rgba(45,206,137,0.07)', border: '1px solid rgba(45,206,137,0.3)', borderRadius: 8, padding: '12px 16px', margin: '16px 0', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+            <span style={{ fontSize: 12, color: 'var(--green)', fontWeight: 700, background: 'rgba(45,206,137,0.12)', border: '1px solid rgba(45,206,137,0.3)', borderRadius: 4, padding: '2px 6px', flexShrink: 0, marginTop: 2, fontFamily: 'var(--font-mono)' }}>TIP</span>
             <div style={{ color: 'var(--text-primary)', lineHeight: 1.7 }}>{item.content}</div>
           </div>
         );
 
         if (item.type === 'warning') return (
-          <div key={i} style={{ background: 'rgba(248,81,73,0.08)', border: '1px solid rgba(248,81,73,0.3)', borderRadius: 8, padding: '12px 16px', margin: '16px 0', display: 'flex', gap: 10 }}>
-            <span style={{ fontSize: 16 }}>⚠️</span>
+          <div key={i} style={{ background: 'rgba(247,95,106,0.07)', border: '1px solid rgba(247,95,106,0.3)', borderRadius: 8, padding: '12px 16px', margin: '16px 0', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+            <span style={{ fontSize: 12, color: 'var(--red)', fontWeight: 700, background: 'rgba(247,95,106,0.12)', border: '1px solid rgba(247,95,106,0.3)', borderRadius: 4, padding: '2px 6px', flexShrink: 0, marginTop: 2, fontFamily: 'var(--font-mono)' }}>!</span>
             <div style={{ color: 'var(--text-primary)', lineHeight: 1.7 }}>{item.content}</div>
           </div>
         );
@@ -56,7 +56,7 @@ export default function ChapterRenderer({ contents }: { contents: ChapterContent
 
         if (item.type === 'reference') return (
           <div key={i} style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8, padding: '12px 16px', margin: '16px 0', display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-            <span style={{ fontSize: 20 }}>🔗</span>
+            <span style={{ fontSize: 13, color: 'var(--accent)', fontWeight: 700, fontFamily: 'var(--font-mono)', background: 'rgba(157,140,255,0.1)', border: '1px solid rgba(157,140,255,0.3)', borderRadius: 4, padding: '2px 6px', flexShrink: 0, marginTop: 2 }}>REF</span>
             <div>
               <a href={item.url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', fontWeight: 600 }}>{item.title}</a>
               <p style={{ margin: '4px 0 0', color: 'var(--text-secondary)', fontSize: 13 }}>{item.description}</p>
@@ -79,7 +79,7 @@ export default function ChapterRenderer({ contents }: { contents: ChapterContent
           <div key={i} style={{ margin: '16px 0' }}>
             {item.steps.map((step, j) => (
               <div key={j} style={{ display: 'flex', gap: 14, padding: '12px 0', borderBottom: j < item.steps.length - 1 ? '1px solid var(--border)' : 'none' }}>
-                <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(88,166,255,0.15)', border: '1px solid var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, color: 'var(--accent)', flexShrink: 0 }}>{j + 1}</div>
+                <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(157,140,255,0.15)', border: '1px solid var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, color: 'var(--accent)', flexShrink: 0 }}>{j + 1}</div>
                 <div>
                   <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>{step.title}</div>
                   <div style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.7, whiteSpace: 'pre-line' }}>{step.content}</div>
@@ -93,7 +93,7 @@ export default function ChapterRenderer({ contents }: { contents: ChapterContent
           <div key={i} style={{ margin: '16px 0', border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden' }}>
             {item.commands.map((cmd, j) => (
               <div key={j} style={{ display: 'flex', gap: 16, padding: '10px 14px', borderBottom: j < item.commands.length - 1 ? '1px solid var(--border)' : 'none', alignItems: 'flex-start' }}>
-                <code style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent)', fontSize: 13, background: 'rgba(88,166,255,0.1)', padding: '2px 8px', borderRadius: 4, whiteSpace: 'nowrap', flexShrink: 0 }}>{cmd.cmd}</code>
+                <code style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent)', fontSize: 13, background: 'rgba(157,140,255,0.1)', padding: '2px 8px', borderRadius: 4, whiteSpace: 'nowrap', flexShrink: 0 }}>{cmd.cmd}</code>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: 13, color: 'var(--text-primary)' }}>{cmd.description}</div>
                   {cmd.example && <code style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>{cmd.example}</code>}
@@ -140,6 +140,37 @@ export default function ChapterRenderer({ contents }: { contents: ChapterContent
             </table>
           </div>
         );
+
+        if (item.type === 'flow') {
+          const colorMap: Record<string, { bg: string; border: string; text: string }> = {
+            accent: { bg: 'rgba(157,140,255,0.1)', border: 'rgba(157,140,255,0.4)', text: 'var(--accent)' },
+            green: { bg: 'rgba(45,206,137,0.08)', border: 'rgba(45,206,137,0.4)', text: 'var(--green)' },
+            amber: { bg: 'rgba(251,191,36,0.08)', border: 'rgba(251,191,36,0.4)', text: '#fbbf24' },
+            red: { bg: 'rgba(247,95,106,0.08)', border: 'rgba(247,95,106,0.4)', text: 'var(--red)' },
+            muted: { bg: 'var(--bg-card)', border: 'var(--border)', text: 'var(--text-secondary)' },
+          };
+          return (
+            <div key={i} style={{ margin: '20px 0' }}>
+              {item.title && <div style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 14 }}>{item.title}</div>}
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 0, alignItems: 'center' }}>
+                {item.nodes.map((node, j) => {
+                  const c = colorMap[node.color ?? 'muted'];
+                  return (
+                    <div key={j} style={{ display: 'flex', alignItems: 'center', gap: 0 }}>
+                      <div style={{ background: c.bg, border: `1px solid ${c.border}`, borderRadius: 8, padding: '10px 14px', minWidth: 90, textAlign: 'center' }}>
+                        <div style={{ fontSize: 13, fontWeight: 700, color: c.text, lineHeight: 1.3 }}>{node.label}</div>
+                        {node.desc && <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 3, lineHeight: 1.4 }}>{node.desc}</div>}
+                      </div>
+                      {j < item.nodes.length - 1 && (
+                        <div style={{ padding: '0 6px', color: 'var(--text-muted)', fontSize: 16, flexShrink: 0 }}>→</div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        }
 
         return null;
       })}

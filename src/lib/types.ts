@@ -14,6 +14,7 @@ export type ChapterContent =
   | { type: 'command-list'; commands: { cmd: string; description: string; example?: string }[] }
   | { type: 'shortcut-list'; shortcuts: { keys: string[]; description: string }[] }
   | { type: 'table'; headers: string[]; rows: string[][] }
+  | { type: 'flow'; title?: string; nodes: { label: string; desc?: string; color?: 'accent' | 'green' | 'amber' | 'red' | 'muted' }[] }
 
 export interface Chapter {
   id: string;

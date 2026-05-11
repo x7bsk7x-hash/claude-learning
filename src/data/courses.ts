@@ -17,6 +17,13 @@ export const courses: Course[] = [
         id: 'ch1',
         title: 'トランスフォーマーとニューラルネットワーク',
         content: [
+          { type: 'flow' as const, title: 'LLM処理の流れ', nodes: [
+            { label: 'テキスト入力', desc: 'ユーザーのプロンプト', color: 'accent' },
+            { label: 'トークン化', desc: '単語→トークンに分割', color: 'accent' },
+            { label: 'Transformer', desc: 'アテンション計算', color: 'accent' },
+            { label: '次トークン予測', desc: '確率分布から選択', color: 'accent' },
+            { label: '出力テキスト', desc: '生成完了', color: 'green' },
+          ]},
           { type: 'text', content: '大規模言語モデル（LLM: Large Language Model）は、大量のテキストデータから「次に来る単語を予測する」ことを学習したAIです。ChatGPT・Claude・Geminiなど、現代の主要なAIはすべてこのアーキテクチャをベースにしています。' },
           { type: 'highlight', content: 'LLMは「次のトークンを予測する機械」です。その副産物として、推論・翻訳・コード生成など驚くほど多様な能力が生まれます。', label: '核心概念' },
           { type: 'text', content: '2017年にGoogleが発表した論文「Attention is All You Need」で提案されたトランスフォーマー（Transformer）アーキテクチャが、現代のLLMの基礎です。アテンション機構により、文章内の離れた単語同士の関係を効率的に学習できます。' },
@@ -67,6 +74,12 @@ export const courses: Course[] = [
         id: 'ch1',
         title: 'Constitutional AIと安全性',
         content: [
+          { type: 'flow' as const, title: 'Claudeの設計思想', nodes: [
+            { label: 'ユーザーの要求', desc: '入力プロンプト', color: 'accent' },
+            { label: 'Constitutional AI', desc: '倫理ルールで評価', color: 'accent' },
+            { label: 'セーフティチェック', desc: '有害性・リスク判断', color: 'amber' },
+            { label: '有益な回答', desc: '役立つ・正直・無害', color: 'green' },
+          ]},
           { type: 'text', content: 'AnthropicはClaudeを「役立つ・無害・正直」（Helpful, Harmless, Honest）を核に設計しています。Constitutional AI（CAI）という手法により、倫理的なルールのセットをもとにモデルを訓練します。' },
           { type: 'highlight', content: 'Claudeは単純に「ユーザーの言うことを聞く」のではなく、より広い倫理的文脈を考慮して応答します。これがClaude独自の特徴です。', label: '設計原則' },
           { type: 'text', content: 'Claude 3以降のモデルはAnthropic Safety Levelで評価され、危険な能力（生物兵器、サイバー攻撃など）の開発を支援しないよう設計されています。同時に、正当な研究やビジネス用途では積極的に協力します。' },
@@ -115,6 +128,13 @@ export const courses: Course[] = [
         id: 'ch1',
         title: '良いプロンプトの構造',
         content: [
+          { type: 'flow' as const, title: '良いプロンプトの構造', nodes: [
+            { label: '役割（Role）', desc: '専門家として振る舞う', color: 'accent' },
+            { label: '文脈（Context）', desc: '前提条件を説明', color: 'accent' },
+            { label: 'タスク（Task）', desc: '具体的な指示内容', color: 'accent' },
+            { label: '形式（Format）', desc: 'JSON・箇条書き等', color: 'accent' },
+            { label: '期待する出力', desc: '精度の高い回答', color: 'green' },
+          ]},
           { type: 'text', content: 'プロンプトの質が出力の質を決定します。以下の要素を意識するだけで、AIの回答は大幅に改善します。' },
           { type: 'steps', steps: [
             { title: '役割（Role）', content: 'AIにどの専門家として振る舞ってほしいかを明示する。「シニアのRustエンジニアとして」など。' },
@@ -169,6 +189,12 @@ export const courses: Course[] = [
         id: 'ch1',
         title: 'Node.jsとnpmのインストール',
         content: [
+          { type: 'flow' as const, title: 'セットアップの手順', nodes: [
+            { label: 'Node.js', desc: 'v22以上をインストール', color: 'accent' },
+            { label: 'npm install', desc: 'claude-codeをインストール', color: 'accent' },
+            { label: 'バージョン確認', desc: 'node / npm バージョン', color: 'accent' },
+            { label: '開発準備完了', desc: 'claude コマンド利用可', color: 'green' },
+          ]},
           { type: 'text', content: 'Claude CodeはNode.js上で動作するCLIツールです。まずNode.jsをインストールします。バージョン管理ツール（nvm / fnm）を使うと複数バージョンの管理が容易です。' },
           { type: 'steps', steps: [
             { title: 'macOS / Linux（fnm推奨）', content: 'curl -fsSL https://fnm.vercel.app/install | bash\nfnm install --lts\nfnm use lts-latest' },
@@ -218,6 +244,13 @@ export const courses: Course[] = [
         id: 'ch1',
         title: 'インストールとログイン',
         content: [
+          { type: 'flow' as const, title: 'Claude Code CLIセットアップ', nodes: [
+            { label: 'npm install', desc: 'グローバルインストール', color: 'accent' },
+            { label: 'claude login', desc: 'Anthropicアカウント認証', color: 'accent' },
+            { label: '/init', desc: 'プロジェクト分析', color: 'accent' },
+            { label: 'CLAUDE.md', desc: '設定ファイル生成', color: 'accent' },
+            { label: 'コーディング開始', desc: 'AI支援で開発スタート', color: 'green' },
+          ]},
           { type: 'text', content: 'Claude CodeはnpmパッケージとしてインストールできるCLIツールです。グローバルインストールで、どのディレクトリからでも使えます。' },
           { type: 'code', language: 'bash', content: '# グローバルインストール\nnpm install -g @anthropic-ai/claude-code\n\n# バージョン確認\nclaude --version\n\n# ログイン（初回のみ）\nclaude\n# ブラウザが開き、Anthropicアカウントでログイン', description: 'インストールとログイン' },
           { type: 'text', content: 'ログインにはAnthropicアカウントが必要です。claude.aiのアカウントがあればそのまま使えます。Claude Proサブスクリプション（$20/月）またはAPI課金のどちらかが必要です。' },
@@ -261,6 +294,12 @@ export const courses: Course[] = [
         id: 'ch1',
         title: 'VS Code拡張機能',
         content: [
+          { type: 'flow' as const, title: 'VS Code + Claude Codeの流れ', nodes: [
+            { label: 'VS Code', desc: '拡張機能をインストール', color: 'accent' },
+            { label: 'ターミナル起動', desc: 'Ctrl+` で開く', color: 'accent' },
+            { label: 'claude 実行', desc: 'セッション開始', color: 'accent' },
+            { label: 'AIコーディング', desc: 'エディタと並列作業', color: 'green' },
+          ]},
           { type: 'text', content: 'Claude CodeはVS Codeのターミナルと統合して使えます。さらにVS Codeのサイドバーに表示する拡張機能も利用可能です。' },
           { type: 'steps', steps: [
             { title: '拡張機能のインストール', content: 'VS Code拡張機能パネルで「Claude Code」と検索し、Anthropic公式の拡張機能をインストール。' },
@@ -313,6 +352,13 @@ export const courses: Course[] = [
         id: 'ch1',
         title: 'Claude Codeの起動と終了',
         content: [
+          { type: 'flow' as const, title: '最初のセッションの流れ', nodes: [
+            { label: 'プロジェクトへcd', desc: 'ルートフォルダに移動', color: 'accent' },
+            { label: 'claude起動', desc: 'インタラクティブモード', color: 'accent' },
+            { label: 'タスクを指示', desc: '自然言語で伝える', color: 'accent' },
+            { label: '変更をレビュー', desc: 'git diffで確認', color: 'amber' },
+            { label: '完了・コミット', desc: '承認して確定', color: 'green' },
+          ]},
           { type: 'text', content: 'ターミナルで claude コマンドを実行するとインタラクティブセッションが始まります。プロジェクトフォルダで起動することが重要です。' },
           { type: 'code', language: 'bash', content: '# プロジェクトフォルダで起動\ncd /path/to/your/project\nclaude\n\n# 特定のモデルで起動\nclaude --model claude-opus-4-7\n\n# ワンショット実行（インタラクティブモードなし）\nclaude -p "package.jsonのdependenciesを一覧表示して"\n\n# セッション終了\n> /quit  # または Ctrl+D', description: '起動と終了のコマンド' },
           { type: 'tip', content: 'Claude Codeは起動時にカレントディレクトリを認識します。プロジェクトルート（package.json や git リポジトリのルート）で起動するのがベストプラクティスです。' },
@@ -358,6 +404,13 @@ export const courses: Course[] = [
         id: 'ch1',
         title: 'ファイルの読み込みと編集',
         content: [
+          { type: 'flow' as const, title: 'ファイル操作の流れ', nodes: [
+            { label: '指示を入力', desc: '自然言語で依頼', color: 'accent' },
+            { label: 'ファイルを読む', desc: 'Readツールで解析', color: 'accent' },
+            { label: 'コードを分析', desc: '問題・変更箇所特定', color: 'accent' },
+            { label: '編集・書き込み', desc: 'Edit / Writeツール', color: 'accent' },
+            { label: '変更を説明', desc: '差分と理由を報告', color: 'green' },
+          ]},
           { type: 'text', content: 'Claude Codeは内部でツール（Read・Write・Edit・Bash・Globなど）を使ってファイルシステムを操作します。ユーザーは自然言語で指示するだけで、Claude Codeが適切なツールを選択して実行します。' },
           { type: 'code', language: 'bash', content: '# 例: ファイルを読んで修正する指示\n> 「src/utils/date.ts を読んで、タイムゾーン処理のバグを見つけて修正して」\n\n# Claude Codeの内部動作（ユーザーには許可確認が表示される）:\n# 1. Read: src/utils/date.ts を読み込む\n# 2. 問題を分析\n# 3. Edit: 該当行を修正\n# 4. 変更内容を説明', description: 'ファイル読み込みと編集の流れ' },
           { type: 'text', content: 'ツールを実行するたびに確認が表示されます（デフォルト）。「このセッションは許可」「常に許可」を選択することで、確認をスキップできます。' },
@@ -399,6 +452,13 @@ export const courses: Course[] = [
         id: 'ch1',
         title: 'よく使うスラッシュコマンド',
         content: [
+          { type: 'flow' as const, title: '主要スラッシュコマンド', nodes: [
+            { label: '/help', desc: 'コマンド一覧表示', color: 'muted' },
+            { label: '/model', desc: 'モデルを切り替える', color: 'muted' },
+            { label: '/clear', desc: '会話履歴リセット', color: 'muted' },
+            { label: '/compact', desc: 'コンテキスト圧縮', color: 'muted' },
+            { label: '/review', desc: 'git変更をレビュー', color: 'accent' },
+          ]},
           { type: 'text', content: 'スラッシュコマンドはClaude Codeの機能を素早く呼び出すための特殊コマンドです。入力中に / を押すと候補が表示されます。' },
           { type: 'command-list', commands: [
             { cmd: '/help', description: '使用可能なコマンドの一覧を表示', example: '> /help' },
@@ -465,6 +525,13 @@ export const courses: Course[] = [
         id: 'ch1',
         title: 'Hooksとは何か',
         content: [
+          { type: 'flow' as const, title: 'Hooksのライフサイクル', nodes: [
+            { label: 'ユーザー要求', desc: 'タスクを指示する', color: 'accent' },
+            { label: 'Claudeのアクション', desc: 'ツール実行を決定', color: 'accent' },
+            { label: 'PreHook', desc: '実行前チェック・前処理', color: 'amber' },
+            { label: 'ツール実行', desc: 'Read/Write/Bash等', color: 'accent' },
+            { label: 'PostHook', desc: 'lint・通知・ログ等', color: 'green' },
+          ]},
           { type: 'text', content: 'HooksはClaude Codeがツールを実行する前後に、ユーザー定義のシェルコマンドを自動実行する仕組みです。CI/CDのフックに似た概念で、コードの品質チェック・通知・ロギングなどに使えます。' },
           { type: 'highlight', content: 'Hooksを使うと「Claude Codeが何かをしたら自動的に〇〇する」というルールを設定できます。例: ファイルを保存したら自動でlintを実行する。', label: 'Hooksの本質' },
           { type: 'text', content: 'Hooksは settings.json の hooks セクションで設定します。フックは以下の4種類です。' },
@@ -517,6 +584,12 @@ export const courses: Course[] = [
         id: 'ch1',
         title: 'MCPとは何か',
         content: [
+          { type: 'flow' as const, title: 'MCPのアーキテクチャ', nodes: [
+            { label: 'Claude Code', desc: 'AIエージェント', color: 'accent' },
+            { label: 'MCPプロトコル', desc: '標準化されたI/F', color: 'accent' },
+            { label: 'MCPサーバー', desc: 'GitHub・DB・Slack等', color: 'accent' },
+            { label: '外部サービス', desc: 'リアルタイムに操作', color: 'green' },
+          ]},
           { type: 'text', content: 'MCP（Model Context Protocol）は、AnthropicがオープンソースとしてリリースしたプロトコルでAIアシスタントが外部ツール・データソースと標準化された方法で連携するための仕様です。' },
           { type: 'highlight', content: 'MCPはAI版の「USB規格」です。MCP対応サーバーを作れば、Claude CodeだけでなくCursor・GitHub Copilot・GeminiなどどのAIエージェントとも接続できます。', label: 'MCPの位置づけ' },
           { type: 'text', content: 'MCPサーバーは、AIが「ツール」として呼び出せる関数を提供します。例: Slackに投稿する・データベースを検索する・Figmaのデザインを取得するなど。' },
@@ -567,6 +640,12 @@ export const courses: Course[] = [
         id: 'ch1',
         title: 'CLAUDE.mdの活用',
         content: [
+          { type: 'flow' as const, title: 'メモリレイヤーの構造', nodes: [
+            { label: 'グローバルCLAUDE.md', desc: '全プロジェクト共通', color: 'muted' },
+            { label: 'プロジェクトCLAUDE.md', desc: 'プロジェクト固有のルール', color: 'accent' },
+            { label: '自動メモリ', desc: '会話から学習・蓄積', color: 'accent' },
+            { label: 'Claudeの回答', desc: '文脈を理解した応答', color: 'green' },
+          ]},
           { type: 'text', content: 'CLAUDE.mdはClaude Codeが自動的に読み込む設定ファイルです。プロジェクトのルールや背景情報を書いておくと、毎回説明しなくてもClaude Codeが正しい判断をします。' },
           { type: 'code', language: 'markdown', content: '# プロジェクト名\n\n## 技術スタック\n- フレームワーク: Next.js 16 (App Router)\n- 言語: TypeScript strict mode\n- スタイル: Tailwind CSS v4\n- DB: PostgreSQL + Prisma\n\n## コーディング規約\n- 関数コンポーネントのみ（クラスコンポーネント禁止）\n- async/awaitを使う（.then().catch()は使わない）\n- エラーハンドリングは必ずcatch節で行う\n\n## デプロイ\n- mainブランチへのpushでVercelに自動デプロイ\n- 本番への変更前に必ずPRを作成してレビューを受ける\n\n## 注意事項\n- .envファイルはgitにコミットしない\n- テストを書かずに新機能を追加しない', description: 'CLAUDE.mdの例', filename: 'CLAUDE.md' },
           { type: 'tip', content: '/init コマンドでCLAUDE.mdを自動生成できます。生成後に確認・編集してチームでgit管理します。' },
@@ -616,6 +695,12 @@ export const courses: Course[] = [
         id: 'ch1',
         title: 'ツール権限の仕組み',
         content: [
+          { type: 'flow' as const, title: 'ツールの権限レベル', nodes: [
+            { label: 'Read（低）', desc: 'ファイル読み込みのみ', color: 'green' },
+            { label: 'Write / Edit（中）', desc: 'ファイル変更・作成', color: 'amber' },
+            { label: 'Bash（高）', desc: '任意コマンド実行', color: 'red' },
+            { label: 'WebFetch（中）', desc: 'URL取得・Web検索', color: 'amber' },
+          ]},
           { type: 'text', content: 'Claude Codeが使用できるツールはパーミッション設定で制御できます。デフォルトでは各ツールの使用前に確認が表示されます。' },
           { type: 'table', headers: ['ツール名', '機能', 'リスクレベル'], rows: [
             ['Read', 'ファイルの読み込み', '低'],
@@ -672,6 +757,14 @@ export const courses: Course[] = [
         id: 'ch1',
         title: 'エラーをClaude Codeに渡す',
         content: [
+          { type: 'flow' as const, title: 'バグ修正ワークフロー', nodes: [
+            { label: 'エラー報告', desc: 'スタックトレース提供', color: 'red' },
+            { label: '原因を分析', desc: '仮説を3つ挙げる', color: 'accent' },
+            { label: '仮説を検証', desc: '最有力を絞り込む', color: 'accent' },
+            { label: '修正を実装', desc: 'ピンポイントで直す', color: 'accent' },
+            { label: 'テスト実行', desc: '再発防止テスト追加', color: 'accent' },
+            { label: '動作確認', desc: 'バグ解消を確認', color: 'green' },
+          ]},
           { type: 'text', content: 'バグ修正の最初のステップは、エラー情報をClaude Codeに正確に渡すことです。スタックトレース・エラーメッセージ・再現手順を含めると精度が上がります。' },
           { type: 'example', content: '効果的なバグ報告の例:\n\n> 「以下のエラーが発生しています。修正してください。\n\nエラー: TypeError: Cannot read properties of undefined (reading \'name\')\n場所: src/components/UserProfile.tsx:42\n\nスタックトレース:\n  at UserProfile (UserProfile.tsx:42)\n  at Dashboard (Dashboard.tsx:15)\n\n再現手順:\n1. ログイン済みユーザーでダッシュボードを開く\n2. プロフィールアイコンをクリック\n3. ユーザーデータが取得される前にプロフィールを表示しようとするとクラッシュ\n\n期待動作: ローディング状態を表示し、データ取得後にプロフィールを表示する」' },
           { type: 'tip', content: 'エラーをターミナルでコピーしてそのままClaude Codeに貼り付けるだけでもOKです。Claude Codeはエラーを分析して原因を特定します。' },
@@ -722,6 +815,13 @@ export const courses: Course[] = [
         id: 'ch1',
         title: 'テストコードの自動生成',
         content: [
+          { type: 'flow' as const, title: 'TDDサイクル', nodes: [
+            { label: 'テスト作成（Red）', desc: '失敗するテストを書く', color: 'red' },
+            { label: 'テスト実行（失敗）', desc: 'Failを確認する', color: 'red' },
+            { label: '実装する', desc: 'テストが通る最小実装', color: 'accent' },
+            { label: 'テスト実行（Pass）', desc: '全テストが通る', color: 'green' },
+            { label: 'リファクタリング', desc: 'テストを維持して改善', color: 'accent' },
+          ]},
           { type: 'text', content: 'Claude Codeはユニットテスト・統合テスト・E2Eテストを自動生成できます。既存のコードから適切なテストケースを作成します。' },
           { type: 'code', language: 'bash', content: '# テスト生成の指示例\n> 「src/utils/pricing.ts の calculateDiscount 関数のユニットテストを作って。\n  Jest + TypeScriptで。以下のケースを必ずカバーして:\n  - 通常割引（10%引き）\n  - 会員割引（20%引き）\n  - 割引上限（最大5000円引き）\n  - 無効な入力（負の値・NaN）\"', description: 'テスト生成の指示' },
           { type: 'tip', content: '「境界値テストも含めて」「エラーケースを重点的に」「モックを使って外部依存を排除して」など、テストの品質を高める指示を加えましょう。' },
@@ -766,6 +866,13 @@ export const courses: Course[] = [
         id: 'ch1',
         title: 'コードレビューの依頼',
         content: [
+          { type: 'flow' as const, title: 'コードレビューの流れ', nodes: [
+            { label: 'git diff', desc: '変更内容を取得', color: 'muted' },
+            { label: '/review', desc: 'レビューを依頼', color: 'accent' },
+            { label: '問題点の指摘', desc: 'セキュリティ・品質等', color: 'amber' },
+            { label: 'コードを修正', desc: '指摘箇所を直す', color: 'accent' },
+            { label: '再確認・承認', desc: 'PRマージ可能', color: 'green' },
+          ]},
           { type: 'text', content: 'Claude Codeはコードレビュアーとして非常に有能です。プルリクエストの変更や特定ファイルのレビューを依頼できます。' },
           { type: 'code', language: 'bash', content: '# gitの差分をレビューする\n> /review\n\n# または明示的に指定\n> 「git diff mainとHEADの差分を確認して、コードレビューをして」\n\n# 特定の観点でレビュー\n> 「src/api/auth.ts をセキュリティの観点でレビューして。特にSQLインジェクション・XSS・認証バイパスのリスクを重点的に」', description: 'コードレビューの依頼方法' },
           { type: 'tip', content: '/review コマンドは現在のgit changesを自動的にレビューします。PRを出す前の習慣にするとコードの品質が上がります。' },
@@ -813,6 +920,12 @@ export const courses: Course[] = [
         id: 'ch1',
         title: 'チーム向けCLAUDE.mdの設計',
         content: [
+          { type: 'flow' as const, title: 'チーム設定の共有フロー', nodes: [
+            { label: 'CLAUDE.md作成', desc: 'チームルールを記述', color: 'accent' },
+            { label: 'git commit', desc: 'バージョン管理に登録', color: 'accent' },
+            { label: 'チームがpull', desc: '全員が最新ルール取得', color: 'accent' },
+            { label: '共有ルール適用', desc: '一貫した開発体験', color: 'green' },
+          ]},
           { type: 'text', content: 'チームでClaude Codeを使う場合、CLAUDE.mdを共通のルール文書として設計することが重要です。新メンバーのオンボーディングや一貫性のある開発体験を実現します。' },
           { type: 'code', language: 'markdown', content: '# [プロジェクト名] — Claude Code設定\n\n## 重要な原則\n1. テストなしで機能を追加しない\n2. 本番DBに直接書き込まない（テストDBを使う）\n3. セキュリティに関わる変更は必ずレビューを受ける\n4. コミット前に必ず /review を実行する\n\n## 開発ワークフロー\n1. featureブランチを切る\n2. 実装 → テスト → /review\n3. PRを作成、レビュー依頼\n4. CIが通ったらマージ\n\n## アーキテクチャの決定事項\n- APIはRESTful設計（GraphQLは不使用）\n- 認証はJWT（セッションは不使用）\n- ログはJSON形式（console.logは本番では使わない）\n\n## 禁止事項\n- any型の使用（型定義が難しい場合はunknownを使う）\n- コメントアウトされたコードの残存\n- TODO/FIXMEを解決せずにマージ', description: 'チーム向けCLAUDE.md', filename: 'CLAUDE.md' },
         ],
@@ -859,6 +972,12 @@ export const courses: Course[] = [
         id: 'ch1',
         title: 'Claude CodeをCIで使う',
         content: [
+          { type: 'flow' as const, title: 'CI/CD統合の流れ', nodes: [
+            { label: 'PR作成', desc: 'プルリクエスト発行', color: 'accent' },
+            { label: 'GitHub Actions', desc: 'CIワークフロー起動', color: 'accent' },
+            { label: 'claude -p', desc: 'ワンショット実行', color: 'accent' },
+            { label: 'レビューコメント', desc: 'PRに自動投稿', color: 'green' },
+          ]},
           { type: 'text', content: 'Claude CodeはCIパイプラインのステップとして実行できます。プルリクエストの自動コードレビュー・テスト生成・ドキュメント更新などを自動化できます。' },
           { type: 'code', language: 'yaml', content: 'name: Claude Code Review\n\non:\n  pull_request:\n    types: [opened, synchronize]\n\njobs:\n  review:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          fetch-depth: 0\n\n      - name: Setup Node.js\n        uses: actions/setup-node@v4\n        with:\n          node-version: "22"\n\n      - name: Install Claude Code\n        run: npm install -g @anthropic-ai/claude-code\n\n      - name: Run Code Review\n        run: |\n          claude -p "git diff originmain...HEAD のコードをレビューして、\n          問題点をGitHub PRコメント形式で出力して。\n          セキュリティ・パフォーマンス・可読性の観点で。"\n        env:\n          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}', description: 'GitHub Actions でのClaude Code実行', filename: '.github/workflows/claude-review.yml' },
           { type: 'warning', content: 'CIでClaude Codeを実行するとAPIコストが発生します。大量のPRがある場合はコストが高くなる可能性があります。適切なrate limitingを設定してください。' },
@@ -909,6 +1028,13 @@ export const courses: Course[] = [
         id: 'ch1',
         title: 'コスト管理',
         content: [
+          { type: 'flow' as const, title: 'コスト管理の流れ', nodes: [
+            { label: '使用量を監視', desc: 'ダッシュボードを確認', color: 'accent' },
+            { label: '/costで確認', desc: 'セッションコスト把握', color: 'accent' },
+            { label: 'モデルを選択', desc: 'タスクに合ったモデル', color: 'accent' },
+            { label: '/compactで圧縮', desc: 'コンテキストを節約', color: 'accent' },
+            { label: 'コスト削減', desc: '最適な運用コストへ', color: 'green' },
+          ]},
           { type: 'text', content: 'Claude CodeのAPI利用には費用がかかります（Claude Proサブスクリプションまたは従量課金）。組織での使用では適切なコスト管理が重要です。' },
           { type: 'command-list', commands: [
             { cmd: '/cost', description: '現在のセッションのコストを確認', example: '> /cost' },
